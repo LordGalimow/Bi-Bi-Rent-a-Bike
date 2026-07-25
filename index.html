@@ -20,20 +20,517 @@
         body {
             font-family: 'Poppins', sans-serif;
             color: #2b2b2b;
-            background-color: #f8f9fa;
-            line-height: 1.7;
-            padding-top: 85px;
+            background-color: #f4f6f9;
+            line-height: 1.6;
+            padding-top: 80px;
             overflow-x: hidden;
         }
 
         /* --- Animációk --- */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigáció */
+        .bibi-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .bibi-nav-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bibi-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e63946;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .bibi-logo span {
+            color: #1d3557;
+        }
+
+        .bibi-nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .bibi-nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .bibi-nav-links a:hover {
+            color: #e63946;
+        }
+
+        .bibi-phone-btn {
+            background-color: #e63946;
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+            transition: transform 0.3s ease !important;
+        }
+
+        /* Nyelvváltó gomb */
+        .lang-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #1d3557;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .bibi-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: #1d3557;
+            cursor: pointer;
+        }
+
+        /* Hero Szekció */
+        .bibi-hero {
+            background: linear-gradient(rgba(29, 53, 87, 0.85), rgba(29, 53, 87, 0.9)), url('https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .bibi-hero h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .bibi-hero h1 span {
+            color: #ffb703;
+        }
+
+        .bibi-hero p {
+            font-size: 1.1rem;
+            color: #e5e7eb;
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        .delivery-badge {
+            display: inline-block;
+            background: rgba(255, 183, 3, 0.15);
+            border: 1px solid #ffb703;
+            color: #ffb703;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Árazási kategóriák */
+        .pricing-container {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .category-title {
+            font-size: 1.6rem;
+            color: #1d3557;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .category-title i {
+            color: #e63946;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .price-card {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-3px);
+            border-color: #e63946;
+        }
+
+        .price-card .time {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .price-card .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e63946;
+        }
+
+        /* Kapcsolat szekció */
+        .contact-section {
+            background: #1d3557;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-section p {
+            font-size: 1rem;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .big-phone {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffb703;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 30px;
+            word-break: break-all;
+        }
+
+        .contact-details {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* Térkép */
+        .map-container {
+            width: 100%;
+            height: 350px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #64748b;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Mobil nézet optimalizálás */
+        @media (max-width: 768px) {
+            .bibi-hamburger {
+                display: block;
+            }
+
+            .bibi-nav-links {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 25px 0;
+                display: none;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .bibi-nav-links.active {
+                display: flex;
+            }
+
+            .bibi-hero {
+                padding: 60px 15px;
+            }
+
+            .bibi-hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .price-grid {
+                grid-template-columns: repeat(2, 1fr); /* Mobilon 2 oszlopos kártyák a helytakarékosságért */
+                gap: 10px;
+            }
+
+            .price-card {
+                padding: 15px 10px;
+            }
+
+            .price-card .price {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigáció -->
+    <header class="bibi-navbar">
+        <div class="bibi-nav-container">
+            <a href="#" class="bibi-logo">Bi-Bi <span>Rent a Bike</span></a>
+            
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <!-- Nyelvváltó -->
+                <button class="lang-btn" id="lang-toggle">
+                    <i class="fa-solid fa-globe"></i> <span id="lang-text">HR</span>
+                </button>
+
+                <button class="bibi-hamburger" id="hamburger-btn" aria-label="Menu">
+                    <i class="fa-solid fa-bars" id="hamburger-icon"></i>
+                </button>
+            </div>
+
+            <ul class="bibi-nav-links" id="nav-links">
+                <li><a href="#prices" data-en="Prices" data-hr="Cjenik">Prices</a></li>
+                <li><a href="#contact" data-en="Contact" data-hr="Kontakt">Contact</a></li>
+                <li><a href="tel:+385915680716" class="bibi-phone-btn"><i class="fa-solid fa-phone"></i> +385 91 568 0716</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="bibi-hero">
+        <div class="reveal">
+            <h1 data-en="Explore Kaštela & Coast on &lt;span&gt;Two Wheels&lt;/span&gt;" data-hr="Istražite Kaštela i obalu na &lt;span&gt;dva kotača&lt;/span&gt;">Explore Kaštela & Coast on <span>Two Wheels</span></h1>
+            <p data-en="Mountain, Cruising, Electric & Road bikes ready for your adventure." data-hr="Planinski, gradski, električni i cestovni bicikli spremni za vašu avanturu.">Mountain, Cruising, Electric & Road bikes ready for your adventure.</p>
+            <div class="delivery-badge"><i class="fa-solid fa-truck"></i> <span data-en="Bike Delivery / 08 - 21 h" data-hr="Dostava bicikala / 08 - 21 h">Bike Delivery / 08 - 21 h</span></div>
+        </div>
+    </section>
+
+    <!-- Árak -->
+    <div class="pricing-container" id="prices">
+        
+        <!-- Mountain & Cruising -->
+        <div class="reveal">
+            <h2 class="category-title"><i class="fa-solid fa-bicycle"></i> <span data-en="Mountain & Cruising Bikes" data-hr="Planinski i gradski bicikli">Mountain & Cruising Bikes</span></h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="time" data-en="0 - 3 hours" data-hr="0 - 3 sata">0 - 3 hours</div>
+                    <div class="price">10 €</div>
+                </div>
+                <div class="price-card">
+                    <div class="time" data-en="3 - 6 hours" data-hr="3 - 6 sati">3 - 6 hours</div>
+                    <div class="price">15 €</div>
+                </div>
+                <div class="price-card">
+                    <div class="time" data-en="6 - 24 hours" data-hr="6 - 24 sata">6 - 24 hours</div>
+                    <div class="price">20 €</div>
+                </div>
+                <div class="price-card">
+                    <div class="time" data-en="2 Days" data-hr="2 Dana">2 Days</div>
+                    <div class="price">35 €</div>
+                </div>
+                <div class="price-card">
+                    <div class="time" data-en="3 Days" data-hr="3 Dana">3 Days</div>
+                    <div class="price">50 €</div>
+                </div>
+                <div class="price-card">
+                    <div class="time" data-en="10 Days" data-hr="10 Dana">10 Days</div>
+                    <div class="price">100 €</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- E-Bikes -->
+        <div class="reveal">
+            <h2 class="category-title"><i class="fa-solid fa-bolt"></i> <span data-en="E-Bikes" data-hr="Električni bicikli">E-Bikes</span></h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="time" data-en="3 - 6 hours" data-hr="3 - 6 sati">3 - 6 hours</div>
+                    <div class="price">30 €</div>
+                </div>
+                <div class="price-card">
+                    <div class="time" data-en="6 - 24 hours" data-hr="6 - 24 sata">6 - 24 hours</div>
+                    <div class="price">40 €</div>
+                </div>
+                <div class="price-card">
+                    <div class="time" data-en="2 Days" data-hr="2 Dana">2 Days</div>
+                    <div class="price">80 €</div>
+                </div>
+                <div class="price-card">
+                    <div class="time" data-en="Every next day" data-hr="Svaki sljedeći dan">Every next day</div>
+                    <div class="price">20 €</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Road Bikes -->
+        <div class="reveal">
+            <h2 class="category-title"><i class="fa-solid fa-road"></i> <span data-en="Road Bikes" data-hr="Cestovni bicikli">Road Bikes</span></h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="time" data-en="1 - 2 Days" data-hr="1 - 2 Dana">1 - 2 Days</div>
+                    <div class="price">30 €</div>
+                </div>
+                <div class="price-card">
+                    <div class="time" data-en="Every next day" data-hr="Svaki sljedeći dan">Every next day</div>
+                    <div class="price">20 €</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Kapcsolat -->
+    <section class="contact-section" id="contact">
+        <div class="reveal">
+            <h2 data-en="Call & Rent Now" data-hr="Nazovite i iznajmite odmah">Call & Rent Now</h2>
+            <p data-en="We deliver bikes directly to your address in Kaštela!" data-hr="Dostavljamo bicikle direktno na vašu adresu u Kaštelima!">We deliver bikes directly to your address in Kaštela!</p>
+            <a href="tel:+385915680716" class="big-phone"><i class="fa-solid fa-phone"></i> +385 91 568 0716</a>
+            <div class="contact-details">
+                <div><i class="fa-solid fa-envelope"></i> info@bi-bi.hr</div>
+                <div><i class="fa-solid fa-location-dot"></i> Ul. fra Ive Perana 16, Kaštel Stari</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Térkép -->
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2892.3!2d16.35!3d43.55!2m3!1f0!2f0!3f0!3m2!1f1024!2f768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zVWwuIGZyYSBJdmUgUGVyYW5hIDE2LCAyMTIxNiwgS2HFaXRlbGE!5e0!3m2!1sen!2shr!4v1650000000000!5m2!1sen!2shr" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <!-- Lábléc -->
+    <footer>
+        <p>&copy; 2026 Bi-Bi Rent a Bike Kaštela. All rights reserved.</p>
+    </footer>
+
+    <!-- Script -->
+    <script>
+        // Oldal tetejére ugrik betöltéskor
+        window.addEventListener('beforeunload', () => { window.scrollTo(0, 0); });
+        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+        window.scrollTo(0, 0);
+
+        // Mobil hamburger menü
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            if (navLinks.classList.contains('active')) {
+                hamburgerIcon.classList.remove('fa-bars');
+                hamburgerIcon.classList.add('fa-times');
+            } else {
+                hamburgerIcon.classList.remove('fa-times');
+                hamburgerIcon.classList.add('fa-bars');
+            }
+        });
+
+        document.querySelectorAll('.bibi-nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburgerIcon.classList.remove('fa-times');
+                hamburgerIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Nyelvváltó logika (EN / HR)
+        const toggleBtn = document.getElementById('lang-toggle');
+        const langText = document.getElementById('lang-text');
+        let currentLang = 'en';
+
+        toggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'hr' : 'en';
+            langText.textContent = currentLang === 'en' ? 'HR' : 'EN';
+
+            document.querySelectorAll('[data-en]').forEach(element => {
+                if (currentLang === 'hr') {
+                    element.innerHTML = element.getAttribute('data-hr');
+                } else {
+                    element.innerHTML = element.getAttribute('data-en');
+                }
+            });
+        });
+
+        // Görgetési animációk
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
             opacity: 1;
             transform: translateY(0);
         }
